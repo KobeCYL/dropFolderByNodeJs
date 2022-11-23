@@ -1,13 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
-const paiping = (inputDirName) => {
+const paiping = (_pathName,inputDirName) => {
     const outputDirName = inputDirName+"_total";
-    
-    const dirName = path.join('./../../testData/',inputDirName)
+    const pathName = _pathName || './../data';
+    // const dirName = path.join('./../../testData/',inputDirName)
+    const dirName = path.join(pathName,inputDirName)
     const targetFileName = path.join(__dirname, dirName);
-    const dirPath = path.join('./../../testData/',outputDirName);
-    const newDirPath =path.join(__dirname, dirPath);
+    const dirPath = path.join(pathName,outputDirName);
+    const newDirPath =_pathName ? dirPath : path.join(__dirname, dirPath);
+    console.log('dirPath', dirPath)
     console.log('newDirPath', newDirPath)
     fs.mkdirSync(newDirPath);
     function moveDir(targetFileName, newDirPath) {
